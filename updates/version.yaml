@@ -10,3 +10,6 @@
 1.0.2:
   - Added form_sections column to forms table
   - add_form_sections_to_forms.php
+1.0.3:
+  - Added default contact form
+  - seed_contact_form.php
