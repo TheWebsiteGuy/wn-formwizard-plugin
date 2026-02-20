@@ -3,11 +3,9 @@
 This plugin allows you to easily create AJAX forms for Winter CMS.
 
 ## Why Form Wizard?
-Almost everyday we do forms for our clients, personal projects, etc
+Building forms is a core task in almost every web project. However, manually managing field configurations, validation rules, and data storage can quickly become a repetitive and time-consuming process.
 
-Sometimes we need to add or remove fields, change validations, store data and at some point, this can be boring and repetitive.
-
-So, the objective was to find a way to just put the HTML elements on the page, skip the repetitive task of coding and (with some kind of mystic magic) store this data on a database or send by mail.
+Form Wizard was designed to solve this. It allows you to build powerful forms by simply defining your HTML elements, skipping the boilerplate backend coding. Let the wizardry handle your database storage and email notifications automatically.
 
 ### What makes Form Wizard different?
 Unlike the original plugin, Form Wizard includes a powerful **Visual Form Builder**. You can now create, manage, and validate forms entirely within the Winter CMS backend, dragging and dropping your way to perfect forms—no HTML required!
@@ -46,8 +44,13 @@ To use it, follow these steps:
 3. Drag selected component to your page.
 4. Configure component parameters (like form validation, notification settings, etc)
 
-![Form Wizard Preview](assets/images/screenshot.png)
+![Form Wizard Preview](assets/images/screenshot1.png)
 
+### Form Builder
+
+You can create and manage forms in the backend, using the Form Builder.
+
+![Form Builder Preview](assets/images/screenshot2.png)
 
 ## Documentation
 Checkout our docs at:
