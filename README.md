@@ -1,3 +1,5 @@
+![Form Wizard Preview](assets/images/intro.png)
+
 # Form Wizard
 
 This plugin allows you to easily create AJAX forms for Winter CMS.
