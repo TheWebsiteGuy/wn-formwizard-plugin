@@ -1,0 +1,111 @@
+{{ form_ajax(__SELF__ ~ '::onFormSubmit', { id: __SELF__, 'data-request-files': 'true' }) }}
+
+<div class="fw-form">
+
+    <div id="{{ __SELF__ }}_forms_flash"></div>
+
+    {% for section in form_sections %}
+
+    {% if section.title is not empty and section.show_title %}
+    <h3 class="fw-section-title">{{ section.title }}</h3>
+    {% endif %}
+
+    <div class="fw-section fw-cols-{{ section.columns ?? 1 }}">
+
+        {% for field in section.fields %}
+
+        {% set isFullSpan = (field.span == 'full' or section.columns == 1) %}
+        <div class="{{ field.wrapperClass ?? 'form-group' }} {{ isFullSpan ? 'fw-field-full' : '' }}">
+
+            {% if field.type != 'checkbox' %}
+            <label for="{{ field.code }}" class="block mb-1">{{ field.label }} {% if field.required %}<span
+                    class="text-danger">*</span>{% endif %}</label>
+            {% endif %}
+
+            {% if field.type == 'text' %}
+            <input type="text" id="{{ field.code }}" name="{{ field.code }}"
+                class="{{ field.cssClass ?? 'form-control' }}" placeholder="{{ field.placeholder }}" {% if
+                field.required %}required{% endif %}>
+
+            {% elseif field.type == 'email' %}
+            <input type="email" id="{{ field.code }}" name="{{ field.code }}"
+                class="{{ field.cssClass ?? 'form-control' }}" placeholder="{{ field.placeholder }}" {% if
+                field.required %}required{% endif %}>
+
+            {% elseif field.type == 'number' %}
+            <input type="number" id="{{ field.code }}" name="{{ field.code }}"
+                class="{{ field.cssClass ?? 'form-control' }}" placeholder="{{ field.placeholder }}" {% if
+                field.required %}required{% endif %}>
+
+            {% elseif field.type == 'textarea' %}
+            <textarea id="{{ field.code }}" name="{{ field.code }}" class="{{ field.cssClass ?? 'form-control' }}"
+                placeholder="{{ field.placeholder }}" {% if field.required %}required{% endif %}></textarea>
+
+            {% elseif field.type == 'checkbox' %}
+            <div class="checkbox">
+                <label>
+                    <input type="checkbox" id="{{ field.code }}" name="{{ field.code }}" value="1" {% if field.required
+                        %}required{% endif %}>
+                    {{ field.label }} {% if field.required %}<span class="text-danger">*</span>{% endif %}
+                </label>
+            </div>
+
+            {% elseif field.type == 'select' %}
+            <select id="{{ field.code }}" name="{{ field.code }}" class="{{ field.cssClass ?? 'form-control' }}" {% if
+                field.required %}required{% endif %}>
+                <option value="" disabled selected>{{ field.placeholder ?: '-- Select --' }}</option>
+                {% set options = field.options|split(',') %}
+                {% for option in options %}
+                {% set parts = option|split(':') %}
+                {% set val = parts[0]|trim %}
+                {% set label = parts[1] is defined ? parts[1]|trim : val %}
+                <option value="{{ val }}">{{ label }}</option>
+                {% endfor %}
+            </select>
+
+            {% elseif field.type == 'radio' %}
+            {% set options = field.options|split(',') %}
+            {% for option in options %}
+            {% set parts = option|split(':') %}
+            {% set val = parts[0]|trim %}
+            {% set label = parts[1] is defined ? parts[1]|trim : val %}
+            <div class="radio">
+                <label>
+                    <input type="radio" name="{{ field.code }}" value="{{ val }}" {% if field.required %}required{%
+                        endif %}>
+                    {{ label }}
+                </label>
+            </div>
+            {% endfor %}
+
+            {% elseif field.type == 'file' %}
+            {% if __SELF__.property('uploader_enable') == 1 %}
+            <input type="file" name="files[]" multiple {% if field.required %}required{% endif %}>
+            {% else %}
+            <div class="alert alert-warning">
+                Uploads are disabled. Enable "Allow uploads" in the component settings.
+            </div>
+            {% endif %}
+
+            {% endif %}
+
+        </div>
+        {% endfor %}
+
+    </div>
+
+    {% endfor %}
+
+    <div class="form-group mt-4">
+        {% partial '@recaptcha.htm' %}
+    </div>
+
+    <button type="submit" class="btn btn-primary mt-4">Submit</button>
+
+    {{ form_close() }}
+
+    {% if __SELF__.property('uploader_enable') == 1 %}
+    {% partial '@filepond.htm' %}
+    {% endif %}
+
+</div>{# /.fw-form #}

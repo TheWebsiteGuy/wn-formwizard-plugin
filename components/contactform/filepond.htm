@@ -1,0 +1,41 @@
+{# FilePond CSS & JS #}
+
+<link href="https://unpkg.com/filepond/dist/filepond.css" rel="stylesheet" />
+<link href="https://unpkg.com/filepond-plugin-image-preview/dist/filepond-plugin-image-preview.css" rel="stylesheet">
+<script src="https://unpkg.com/filepond-plugin-image-preview/dist/filepond-plugin-image-preview.js"></script>
+<script
+    src="https://unpkg.com/filepond-plugin-image-exif-orientation/dist/filepond-plugin-image-exif-orientation.js"></script>
+<script src="https://unpkg.com/filepond-plugin-file-validate-size/dist/filepond-plugin-file-validate-size.js"></script>
+<script src="https://unpkg.com/filepond-plugin-file-validate-type/dist/filepond-plugin-file-validate-type.js"></script>
+<script src="https://unpkg.com/filepond/dist/filepond.min.js"></script>
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        if (typeof FilePond !== 'undefined') {
+            FilePond.registerPlugin(
+                FilePondPluginImagePreview,
+                FilePondPluginImageExifOrientation,
+                FilePondPluginFileValidateSize,
+                FilePondPluginFileValidateType
+            );
+
+            var inputElements = document.querySelectorAll('input[type="file"]');
+            inputElements.forEach(function (inputElement) {
+                var fieldName = inputElement.name.replace('[]', '');
+                FilePond.create(inputElement, {
+                    server: {
+                        process: {
+                            url: '/thewebsiteguy/formwizard/process',
+                            headers: { 'FILEPOND-FIELD': fieldName }
+                        },
+                        revert: {
+                            url: '/thewebsiteguy/formwizard/process',
+                            headers: { 'FILEPOND-FIELD': fieldName }
+                        }
+                    },
+                    allowMultiple: true,
+                    maxFileSize: '{{ allowed_filesize }}MB'
+                });
+            });
+        }
+    });
+</script>

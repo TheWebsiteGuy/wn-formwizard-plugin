@@ -1,0 +1,30 @@
+columns:
+  id:
+    label: thewebsiteguy.formwizard::lang.controllers.records.columns.id
+    searchable: true
+
+  group:
+    label: thewebsiteguy.formwizard::lang.controllers.records.columns.group
+    searchable: true
+
+  ip:
+    label: thewebsiteguy.formwizard::lang.controllers.records.columns.ip
+    searchable: true
+
+  form_data:
+    label: thewebsiteguy.formwizard::lang.controllers.records.columns.form_data
+    type: partial
+    path: $/thewebsiteguy/formwizard/models/record/fields/_stored_fields.htm
+    searchable: true
+
+  files:
+    label: thewebsiteguy.formwizard::lang.controllers.records.columns.files
+    type: partial
+    path: $/thewebsiteguy/formwizard/models/record/fields/_files_fields.htm
+    searchable: false
+    sortable: false
+    #invisible : true
+
+  created_at:
+    label: thewebsiteguy.formwizard::lang.controllers.records.columns.created_at
+    type: datetime

@@ -1,0 +1,12 @@
+1.0.0:
+  - First version of Form Wizard
+  - create_records_table.php
+  - add_group_field.php
+  - add_unread_field.php
+  - create_forms_table.php
+1.0.1:
+  - Added apply_styles column to forms table
+  - add_apply_styles_to_forms.php
+1.0.2:
+  - Added form_sections column to forms table
+  - add_form_sections_to_forms.php

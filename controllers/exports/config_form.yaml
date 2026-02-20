@@ -1,0 +1,2 @@
+form: $/thewebsiteguy/formwizard/models/export/fields.yaml
+modelClass: TheWebsiteGuy\FormWizard\Models\Record

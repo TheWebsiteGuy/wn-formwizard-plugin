@@ -1,0 +1,19 @@
+<script>
+    $(':input', '{{ id }}')
+        .not(':button, :submit, :reset, :hidden')
+        .val('')
+        .prop('checked', false)
+        .prop('selected', false);
+
+    if (typeof grecaptcha !== 'undefined' && '{{ recaptcha_version }}' === 'v2') {
+        grecaptcha.reset();
+    }
+
+    // Filepond reset 
+    if ($('.filepond--root').length) {
+        var pond = FilePond.find(document.querySelector('.filepond--root'));
+        if (pond) {
+            pond.removeFiles();
+        }
+    }
+</script>

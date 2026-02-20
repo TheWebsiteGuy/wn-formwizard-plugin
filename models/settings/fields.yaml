@@ -1,0 +1,99 @@
+tabs:
+  fields:
+    plugin_help:
+      type: partial
+      path: $/thewebsiteguy/formwizard/models/settings/_plugin_help.htm
+      tab: thewebsiteguy.formwizard::lang.settings.tabs.general
+
+    section_ui:
+      label: UI
+      type: section
+      comment: Settings related to plugin user inferface
+      tab: thewebsiteguy.formwizard::lang.settings.tabs.general
+      cssClass: m-t
+
+    global_hide_button:
+      label: thewebsiteguy.formwizard::lang.settings.global_hide_button
+      comment: thewebsiteguy.formwizard::lang.settings.global_hide_button_desc
+      type: switch
+      default: false
+      tab: thewebsiteguy.formwizard::lang.settings.tabs.general
+
+    section_uploads:
+      label: File uploads
+      type: section
+      comment: Settings related to file uploads through components
+      tab: thewebsiteguy.formwizard::lang.settings.tabs.general
+      cssClass: m-t-lg
+
+    global_allowed_filesize:
+      label: Max upload size (in kilobytes)
+      type: number
+      default: 10000
+      tab: thewebsiteguy.formwizard::lang.settings.tabs.general
+      span: left
+
+    global_allowed_files:
+      label: Allowed file formats
+      type: taglist
+      default: jpg,jpeg,bmp,png,webp,gif,js,ico,css,ics,odt,doc,docx,ppt,pptx,pdf,txt,xml,ods,xls,xlsx,ttf,flv,wmv,mp3,ogg,wav,avi,mov,mp4,mpeg,webm,mkv,rar,xml,zip
+      tab: thewebsiteguy.formwizard::lang.settings.tabs.general
+      span: right
+
+    recaptcha_help:
+      type: partial
+      path: $/thewebsiteguy/formwizard/models/settings/_recaptcha_help.htm
+      tab: thewebsiteguy.formwizard::lang.settings.tabs.recaptcha
+
+    recaptcha_site_key:
+      label: thewebsiteguy.formwizard::lang.settings.recaptcha_site_key
+      span: left
+      tab: thewebsiteguy.formwizard::lang.settings.tabs.recaptcha
+
+    recaptcha_secret_key:
+      label: thewebsiteguy.formwizard::lang.settings.recaptcha_secret_key
+      span: right
+      tab: thewebsiteguy.formwizard::lang.settings.tabs.recaptcha
+
+    recaptcha_version:
+      label: Version
+      type: dropdown
+      options:
+        v2: reCAPTCHA v2
+        v3: reCAPTCHA v3
+      default: v2
+      span: left
+      tab: thewebsiteguy.formwizard::lang.settings.tabs.recaptcha
+
+    recaptcha_score_threshold:
+      label: Score Threshold
+      type: number
+      default: 0.5
+      span: right
+      comment: "For v3 only. 1.0 is very likely a human, 0.0 is very likely a bot."
+      tab: thewebsiteguy.formwizard::lang.settings.tabs.recaptcha
+      trigger:
+        action: show
+        field: recaptcha_version
+        condition: v3
+
+    gdpr_help:
+      type: partial
+      path: $/thewebsiteguy/formwizard/models/settings/_gdpr_help.htm
+      tab: thewebsiteguy.formwizard::lang.settings.tabs.gdpr
+
+    gdpr_enable:
+      label: thewebsiteguy.formwizard::lang.settings.gdpr_enable
+      type: switch
+      default: false
+      tab: thewebsiteguy.formwizard::lang.settings.tabs.gdpr
+
+    gdpr_days:
+      label: thewebsiteguy.formwizard::lang.settings.gdpr_days
+      span: left
+      default: 120
+      tab: thewebsiteguy.formwizard::lang.settings.tabs.gdpr
+      trigger:
+        action: show
+        field: gdpr_enable
+        condition: checked

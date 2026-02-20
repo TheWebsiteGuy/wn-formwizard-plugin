@@ -1,0 +1,22 @@
+<?php Block::put('breadcrumb') ?>
+<ul>
+    <li><a href="<?= Backend::url('thewebsiteguy/formwizard/forms') ?>">Forms</a></li>
+    <li>
+        <?= e($this->pageTitle) ?>
+    </li>
+</ul>
+<?php Block::endPut() ?>
+
+<div class="layout-row">
+    <?= $this->formRenderPreview() ?>
+</div>
+
+<div class="form-buttons">
+    <div class="loading-indicator-container">
+        <span class="btn-text">
+            <a href="<?= Backend::url('thewebsiteguy/formwizard/forms') ?>">
+                <?= e(trans('backend::lang.form.return_to_list')) ?>
+            </a>
+        </span>
+    </div>
+</div>

@@ -1,0 +1,4 @@
+title: Forms
+modelClass: TheWebsiteGuy\FormWizard\Models\Form
+toolbar:
+  buttons: reorder_toolbar

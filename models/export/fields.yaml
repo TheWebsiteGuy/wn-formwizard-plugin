@@ -1,0 +1,85 @@
+fields:
+  ################################################################################################################################################
+  #   FILTER SECTION
+  ################################################################################################################################################
+  filter_section:
+    label: thewebsiteguy.formwizard::lang.controllers.exports.filter_section
+    type: section
+    cssClass: m-t-md
+
+  filter_type:
+    label: thewebsiteguy.formwizard::lang.controllers.exports.filter_type
+    type: switch
+    default: true
+
+  filter_groups:
+    label: thewebsiteguy.formwizard::lang.controllers.exports.filter_groups
+    span: left
+    type: checkboxlist
+    options: getGroupsOptions
+    trigger:
+      action: hide
+      field: filter_type
+      condition: checked
+
+  filter_date_after:
+    label: thewebsiteguy.formwizard::lang.controllers.exports.filter_date_after
+    span: left
+    type: datepicker
+    mode: date
+    trigger:
+      action: hide
+      field: filter_type
+      condition: checked
+
+  filter_date_before:
+    label: thewebsiteguy.formwizard::lang.controllers.exports.filter_date_before
+    span: left
+    type: datepicker
+    mode: date
+    trigger:
+      action: hide
+      field: filter_type
+      condition: checked
+
+  ################################################################################################################################################
+  #   OPTIONS SECTION
+  ################################################################################################################################################
+  options_section:
+    label: thewebsiteguy.formwizard::lang.controllers.exports.options_section
+    type: section
+    cssClass: m-t-md
+
+  options_delimiter:
+    label: thewebsiteguy.formwizard::lang.controllers.exports.options_delimiter
+    comment: thewebsiteguy.formwizard::lang.controllers.exports.options_delimiter_com
+    span: right
+    type: switch
+    default: false
+
+  options_metadata:
+    label: thewebsiteguy.formwizard::lang.controllers.exports.options_metadata
+    comment: thewebsiteguy.formwizard::lang.controllers.exports.options_metadata_com
+    span: left
+    type: switch
+    default: true
+
+  options_utf:
+    label: thewebsiteguy.formwizard::lang.controllers.exports.options_utf
+    comment: thewebsiteguy.formwizard::lang.controllers.exports.options_utf_com
+    span: right
+    type: switch
+    default: true
+
+  options_deleted:
+    label: thewebsiteguy.formwizard::lang.controllers.exports.options_deleted
+    span: left
+    type: switch
+    default: false
+
+  options_files:
+    label: thewebsiteguy.formwizard::lang.controllers.exports.options_files
+    comment: thewebsiteguy.formwizard::lang.controllers.exports.options_files_com
+    span: left
+    type: switch
+    default: false

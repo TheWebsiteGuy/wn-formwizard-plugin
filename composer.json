@@ -1,0 +1,33 @@
+{
+    "name": "thewebsiteguy/wn-formwizard-plugin",
+    "type": "winter-plugin",
+    "description": "Create easy AJAX forms",
+    "homepage": "https://github.com/thewebsiteguy/wn-formwizard-plugin",
+    "keywords": [
+        "winter",
+        "cms",
+        "wintercms",
+        "plugin",
+        "form",
+        "forms",
+        "form wizard",
+        "form builder",
+        "recaptcha"
+    ],
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "The Website Guy",
+            "email": "support@thewebsiteguy.uk",
+            "role": "Author"
+        }
+    ],
+    "support": {
+        "issues": "https://github.com/thewebsiteguy/wn-formwizard-plugin/issues",
+        "source": "https://github.com/thewebsiteguy/wn-formwizard-plugin"
+    },
+    "require": {
+        "php": ">=7.2",
+        "composer/installers": "~1.0"
+    }
+}

@@ -1,0 +1,20 @@
+<?php Block::put('breadcrumb') ?>
+<ul>
+    <li><a href="<?php echo Backend::url('thewebsiteguy/formwizard/records') ?>">
+            <?php echo e(trans('thewebsiteguy.formwizard::lang.menu.records.label')) ?>
+        </a></li>
+    <li>
+        <?php echo e(trans('thewebsiteguy.formwizard::lang.controllers.exports.breadcrumb')) ?>
+    </li>
+</ul>
+<?php Block::endPut() ?>
+
+<?php echo Form::open(['url' => Backend::url('thewebsiteguy/formwizard/exports/csv/')]) ?>
+
+<?php echo $this->formRender() ?>
+
+<div class="form-buttons m-t-lg">
+    <?= Form::submit(e(trans('thewebsiteguy.formwizard::lang.controllers.exports.title')), ['class' => 'btn btn-primary']) ?>
+</div>
+
+<?php echo Form::close() ?>

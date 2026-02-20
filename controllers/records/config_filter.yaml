@@ -1,0 +1,12 @@
+scopes:
+  group:
+    label: thewebsiteguy.formwizard::lang.controllers.records.columns.group
+    type: group
+    modelClass: TheWebsiteGuy\FormWizard\Models\Record
+    options: filterGroups
+    conditions: "`group` in (:filtered)"
+
+  created_at:
+    label: thewebsiteguy.formwizard::lang.controllers.records.columns.created_at
+    type: daterange
+    conditions: created_at >= ':after' AND created_at <= ':before'

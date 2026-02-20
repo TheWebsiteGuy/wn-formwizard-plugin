@@ -1,0 +1,17 @@
+columns:
+  name:
+    label: Name
+    searchable: true
+    sortable: true
+  code:
+    label: Code
+    searchable: true
+    sortable: true
+  description:
+    label: Description
+    searchable: true
+    sortable: false
+  created_at:
+    label: Created
+    type: datetime
+    sortable: true

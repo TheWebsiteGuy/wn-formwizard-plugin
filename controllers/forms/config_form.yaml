@@ -1,0 +1,10 @@
+name: Form
+modelClass: TheWebsiteGuy\FormWizard\Models\Form
+form: $/thewebsiteguy/formwizard/models/form/fields.yaml
+defaultRedirect: thewebsiteguy/formwizard/forms
+create:
+  redirect: thewebsiteguy/formwizard/forms/update/:id
+  redirectClose: thewebsiteguy/formwizard/forms
+update:
+  redirect: thewebsiteguy/formwizard/forms
+  redirectClose: thewebsiteguy/formwizard/forms

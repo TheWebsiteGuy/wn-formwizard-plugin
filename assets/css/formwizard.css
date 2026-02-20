@@ -1,0 +1,164 @@
+/**
+ * FormWizard scoped form styles.
+ * Scoped to .fw-form to prevent bleeding into the rest of the site.
+ * Targets the default classes pre-filled by the form builder:
+ *   - .form-control  (default cssClass on all field inputs)
+ *   - .form-group    (default wrapperClass on all field wrappers)
+ * Users can change these defaults per-field in the form builder.
+ */
+
+.fw-form {
+    --fw-font-family: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", sans-serif;
+    --fw-font-size: 1rem;
+    --fw-line-height: 1.5;
+    --fw-border-radius: 0.375rem;
+    --fw-border-color: #bdbdbd;
+    --fw-focus-color: #1b6ef3;
+    --fw-bg: #fff;
+    --fw-input-padding: 0.5rem 0.75rem;
+    --fw-spacing: 1rem;
+    --fw-section-gap: 1.5rem;
+    font-family: var(--fw-font-family);
+    font-size: var(--fw-font-size);
+    line-height: var(--fw-line-height);
+}
+
+/* Section heading */
+.fw-form .fw-section-title {
+    font-size: 1.1rem;
+    font-weight: 600;
+    margin: 0 0 0.75rem 0;
+    padding-bottom: 0.4rem;
+    border-bottom: 1px solid #e0e0e0;
+}
+
+/* Section grid wrapper */
+.fw-form .fw-section {
+    display: grid;
+    gap: var(--fw-spacing);
+    margin-bottom: var(--fw-section-gap);
+}
+
+.fw-form .fw-cols-1 {
+    grid-template-columns: 1fr;
+}
+
+.fw-form .fw-cols-2 {
+    grid-template-columns: 1fr 1fr;
+}
+
+/* Full-width field inside a 2-col section */
+.fw-form .fw-cols-2 .fw-field-full {
+    grid-column: 1 / -1;
+}
+
+/* Responsive: single column on small screens */
+@media (max-width: 640px) {
+    .fw-form .fw-cols-2 {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* Labels */
+.fw-form label {
+    display: block;
+    margin-bottom: 0.25rem;
+    font-weight: 500;
+}
+
+/* .form-control — applied by default to all text, email, number, textarea, select fields */
+.fw-form .form-control {
+    display: block;
+    width: 100%;
+    padding: var(--fw-input-padding);
+    font-size: var(--fw-font-size);
+    font-family: var(--fw-font-family);
+    line-height: var(--fw-line-height);
+    color: inherit;
+    background-color: var(--fw-bg);
+    border: 1px solid var(--fw-border-color);
+    border-radius: var(--fw-border-radius);
+    outline: none;
+    transition: border-color 0.15s ease, box-shadow 0.15s ease;
+    box-sizing: border-box;
+    appearance: none;
+    -webkit-appearance: none;
+}
+
+.fw-form .form-control:focus {
+    border-color: var(--fw-focus-color);
+    box-shadow: 0 0 0 3px color-mix(in srgb, var(--fw-focus-color) 20%, transparent);
+}
+
+/* Select — custom arrow */
+.fw-form select.form-control {
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23666' stroke-width='2'%3E%3Cpolyline points='6 9 12 15 18 9'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 0.75rem center;
+    background-size: 1rem;
+    padding-right: 2.5rem;
+}
+
+/* Textarea */
+.fw-form textarea.form-control {
+    min-height: 8rem;
+    resize: vertical;
+}
+
+/* Checkboxes & radio */
+.fw-form input[type="checkbox"],
+.fw-form input[type="radio"] {
+    width: 1em;
+    height: 1em;
+    margin-right: 0.4rem;
+    accent-color: var(--fw-focus-color);
+    cursor: pointer;
+    vertical-align: middle;
+}
+
+.fw-form .checkbox label,
+.fw-form .radio label {
+    display: inline-flex;
+    align-items: center;
+    cursor: pointer;
+    font-weight: normal;
+}
+
+/* Submit button */
+.fw-form button[type="submit"],
+.fw-form input[type="submit"] {
+    display: inline-block;
+    padding: 0.55rem 1.25rem;
+    font-size: var(--fw-font-size);
+    font-family: var(--fw-font-family);
+    font-weight: 600;
+    color: #fff;
+    background-color: var(--fw-focus-color);
+    border: none;
+    border-radius: var(--fw-border-radius);
+    cursor: pointer;
+    transition: background-color 0.15s ease, opacity 0.15s ease;
+}
+
+.fw-form button[type="submit"]:hover,
+.fw-form input[type="submit"]:hover {
+    opacity: 0.88;
+}
+
+/* .form-group — applied by default to all field wrappers */
+.fw-form .form-group {
+    margin-bottom: 0;
+}
+
+/* Alerts */
+.fw-form .alert {
+    padding: 0.75rem 1rem;
+    border-radius: var(--fw-border-radius);
+    margin-bottom: var(--fw-spacing);
+}
+
+.fw-form .alert-warning {
+    background-color: #fff8e1;
+    border: 1px solid #ffe082;
+    color: #7a5800;
+}
