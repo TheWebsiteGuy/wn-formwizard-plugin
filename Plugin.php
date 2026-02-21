@@ -125,9 +125,6 @@ class Plugin extends PluginBase
 
     public function boot()
     {
-        \Event::listen('backend.page.beforeDisplay', function ($controller) {
-            $controller->addCss('/plugins/thewebsiteguy/formwizard/assets/css/backend.css');
-        });
     }
 
     public function register()
