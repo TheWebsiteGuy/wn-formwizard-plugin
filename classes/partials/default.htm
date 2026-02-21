@@ -37,9 +37,14 @@
                 class="{{ field.cssClass ?? 'form-control' }}" placeholder="{{ field.placeholder }}" {% if
                 field.required %}required{% endif %}>
 
+            {% elseif field.type == 'date' %}
+            <input type="date" id="{{ field.code }}" name="{{ field.code }}"
+                class="{{ field.cssClass ?? 'form-control' }}" {% if field.placeholder
+                %}placeholder="{{ field.placeholder }}" {% endif %} {% if field.required %}required{% endif %}>
+
             {% elseif field.type == 'textarea' %}
             <textarea id="{{ field.code }}" name="{{ field.code }}" class="{{ field.cssClass ?? 'form-control' }}"
-                placeholder="{{ field.placeholder }}" {% if field.required %}required{% endif %}></textarea>
+                rows="5" placeholder="{{ field.placeholder }}" {% if field.required %}required{% endif %}></textarea>
 
             {% elseif field.type == 'checkbox' %}
             <div class="checkbox">

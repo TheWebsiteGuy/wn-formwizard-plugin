@@ -30,6 +30,7 @@ window.initFormBuilder = function (id) {
                 { type: 'email', name: 'Email Address', icon: 'icon-envelope' },
                 { type: 'textarea', name: 'Text Area', icon: 'icon-align-left' },
                 { type: 'number', name: 'Number', icon: 'icon-hashtag' },
+                { type: 'date', name: 'Date Picker', icon: 'icon-calendar' },
                 { type: 'select', name: 'Select/Dropdown', icon: 'icon-list-ul' },
                 { type: 'radio', name: 'Radio Buttons', icon: 'icon-dot-circle-o' },
                 { type: 'checkbox', name: 'Checkbox', icon: 'icon-check-square-o' },

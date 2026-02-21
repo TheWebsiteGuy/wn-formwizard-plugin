@@ -16,3 +16,8 @@
 1.0.4:
   - Added drag-and-drop Visual Form Builder powered by Vue 3 for editing form layouts
   - Replaced legacy repeater field with custom FormWidget
+1.0.5:
+  - Added 'Date Picker' field support to visual form builder
+  - Fixed textarea rendering with default rows attribute
+  - Fixed form builder dropping previously saved fields on load
+  - Fixed frontend forms rendering blank

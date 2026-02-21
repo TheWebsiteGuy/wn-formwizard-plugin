@@ -36,9 +36,9 @@ class FormBuilder extends FormWidgetBase
     public function getSaveValue($value)
     {
         if (!$value) {
-            return json_encode([]);
+            return [];
         }
 
-        return $value;
+        return is_string($value) ? json_decode($value, true) : $value;
     }
 }

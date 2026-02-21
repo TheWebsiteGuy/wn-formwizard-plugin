@@ -22,7 +22,15 @@ class ContactForm extends FormWizard
         if ($form) {
             $this->page['form_fields'] = $form->form_fields;
             $this->form_fields = $form->form_fields;
-            $this->page['form_sections'] = $form->form_sections ?? [];
+            
+            $sections = $form->form_sections ?? [];
+            if (is_string($sections)) {
+                $decoded = json_decode($sections, true);
+                if (json_last_error() === JSON_ERROR_NONE && is_array($decoded)) {
+                    $sections = $decoded;
+                }
+            }
+            $this->page['form_sections'] = $sections;
         }
     }
 

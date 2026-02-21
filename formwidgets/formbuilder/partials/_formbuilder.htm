@@ -1,12 +1,12 @@
 <div class="fw-formbuilder-container" id="<?= $this->getId() ?>">
     <!-- We inject the raw JSON data into a hidden script tag so Vue can parse it -->
     <script type="application/json" id="<?= $this->getId() ?>-data">
-        <?= json_encode($value ?? []) ?>
+        <?= is_string($value) ? $value : json_encode($value ?? []) ?>
     </script>
 
     <!-- The Hidden Input that WinterCMS will actually save -->
     <input type="hidden" name="<?= $name ?>" id="<?= $this->getId() ?>-input"
-        value="<?= e(json_encode($value ?? [])) ?>" />
+        value="<?= e(is_string($value) ? $value : json_encode($value ?? [])) ?>" />
 
     <div id="<?= $this->getId() ?>-vue" class="fw-formbuilder-app">
         <div class="fw-fb-sidebar">
@@ -85,6 +85,9 @@
                                                 v-if="['text','email','number'].includes(field.type)">
                                                 {{ field.placeholder || 'Text Input' }}
                                             </div>
+                                            <div class="fw-fb-mock-input" v-if="field.type === 'date'">
+                                                {{ field.placeholder || 'Date Picker' }}
+                                            </div>
                                             <div class="fw-fb-mock-input textarea" v-if="field.type === 'textarea'">
                                                 {{ field.placeholder || 'Text Area' }}
                                             </div>
@@ -144,6 +147,7 @@
                         <option value="email">Email</option>
                         <option value="textarea">Textarea</option>
                         <option value="number">Number</option>
+                        <option value="date">Date Picker</option>
                         <option value="checkbox">Checkbox</option>
                         <option value="select">Select Dropdown</option>
                         <option value="radio">Radio Buttons</option>
@@ -166,7 +170,7 @@
                     </div>
                 </div>
                 <div class="form-group"
-                    v-if="['text','email','number','textarea','select'].includes(selectedField.type)">
+                    v-if="['text','email','number','date','textarea','select'].includes(selectedField.type)">
                     <label>Placeholder</label>
                     <input type="text" v-model="selectedField.placeholder" class="form-control" @input="updateOutput">
                 </div>
