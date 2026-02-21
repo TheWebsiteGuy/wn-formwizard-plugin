@@ -105,6 +105,16 @@ class Plugin extends PluginBase
         return $components;
     }
 
+    public function registerFormWidgets()
+    {
+        return [
+            'TheWebsiteGuy\FormWizard\FormWidgets\FormBuilder' => [
+                'label' => 'Form Builder',
+                'code' => 'fw_formbuilder'
+            ]
+        ];
+    }
+
     public function registerMailTemplates()
     {
         return [

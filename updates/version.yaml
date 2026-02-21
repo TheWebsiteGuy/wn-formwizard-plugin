@@ -13,3 +13,6 @@
 1.0.3:
   - Added default contact form
   - seed_contact_form.php
+1.0.4:
+  - Added drag-and-drop Visual Form Builder powered by Vue 3 for editing form layouts
+  - Replaced legacy repeater field with custom FormWidget

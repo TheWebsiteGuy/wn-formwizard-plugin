@@ -1,0 +1,218 @@
+<div class="fw-formbuilder-container" id="<?= $this->getId() ?>">
+    <!-- We inject the raw JSON data into a hidden script tag so Vue can parse it -->
+    <script type="application/json" id="<?= $this->getId() ?>-data">
+        <?= json_encode($value ?? []) ?>
+    </script>
+
+    <!-- The Hidden Input that WinterCMS will actually save -->
+    <input type="hidden" name="<?= $name ?>" id="<?= $this->getId() ?>-input"
+        value="<?= e(json_encode($value ?? [])) ?>" />
+
+    <div id="<?= $this->getId() ?>-vue" class="fw-formbuilder-app">
+        <div class="fw-fb-sidebar">
+            <div class="fw-fb-panel fw-fb-toolbox">
+                <h4>Toolbox</h4>
+                <p class="text-muted small">Drag fields into sections</p>
+
+                <draggable class="fw-fb-tools" :list="toolboxFields"
+                    :group="{ name: 'fields', pull: 'clone', put: false }" :clone="cloneField" item-key="type">
+                    <template #item="{ element }">
+                        <div class="fw-fb-tool-item">
+                            <i :class="getIconForType(element.type)"></i> {{ element.name }}
+                        </div>
+                    </template>
+                </draggable>
+
+                <hr>
+
+                <button type="button" class="btn btn-sm btn-primary w-full mt-2" @click="addSection">
+                    <i class="icon-plus"></i> Add Section
+                </button>
+            </div>
+        </div>
+
+        <div class="fw-fb-canvas">
+            <draggable class="fw-fb-sections" :list="sections" group="sections" handle=".fw-fb-section-handle"
+                item-key="id" @change="updateOutput">
+                <template #item="{ element: section, index: sectionIndex }">
+                    <div class="fw-fb-section">
+                        <div class="fw-fb-section-header">
+                            <div class="fw-fb-section-header-left">
+                                <i class="icon-arrows fw-fb-section-handle"></i>
+                                <div class="fw-fb-section-header-content">
+                                    <input type="text" v-model="section.title" placeholder="Section Title"
+                                        class="form-control form-control-sm border-0 bg-transparent fw-bold"
+                                        @change="updateOutput" />
+                                    <label class="mb-0 mt-1 d-flex align-items-center cursor-pointer text-muted small">
+                                        <input type="checkbox" v-model="section.show_title" @change="updateOutput"
+                                            class="me-1"> Show this group title on the frontend
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="fw-fb-section-actions">
+                                <select v-model="section.columns" class="form-control form-control-sm me-2"
+                                    @change="updateOutput">
+                                    <option :value="1">1 Column</option>
+                                    <option :value="2">2 Columns</option>
+                                </select>
+                                <button type="button" class="btn btn-sm btn-danger fw-fb-delete-btn"
+                                    @click="removeSection(sectionIndex)" title="Delete Section">
+                                    <i class="icon-trash"></i>
+                                </button>
+                            </div>
+                        </div>
+
+                        <div class="fw-fb-section-body" :class="'fw-cols-' + section.columns">
+                            <draggable class="fw-fb-dropzone" :list="section.fields" group="fields" item-key="id"
+                                ghost-class="fw-fb-ghost" @change="updateOutput">
+                                <template #item="{ element: field, index: fieldIndex }">
+                                    <div class="fw-fb-field"
+                                        :class="[{'active': selectedField === field}, field.span === 'full' ? 'fw-field-full' : '']"
+                                        @click.stop="selectField(field)">
+                                        <div class="fw-fb-field-overlay">
+                                            <div class="fw-fb-field-actions">
+                                                <i class="icon-arrows fw-fb-field-handle"></i>
+                                                <button type="button" class="btn btn-xs btn-danger btn-icon"
+                                                    @click.stop="removeField(sectionIndex, fieldIndex)">
+                                                    <i class="icon-trash"></i>
+                                                </button>
+                                            </div>
+                                        </div>
+                                        <div class="fw-fb-field-preview">
+                                            <label>{{ field.label }} <span class="text-danger"
+                                                    v-if="field.required">*</span></label>
+                                            <div class="fw-fb-mock-input"
+                                                v-if="['text','email','number'].includes(field.type)">
+                                                {{ field.placeholder || 'Text Input' }}
+                                            </div>
+                                            <div class="fw-fb-mock-input textarea" v-if="field.type === 'textarea'">
+                                                {{ field.placeholder || 'Text Area' }}
+                                            </div>
+                                            <div class="fw-fb-mock-select" v-if="field.type === 'select'">
+                                                {{ field.placeholder || '-- Select --' }}
+                                            </div>
+                                            <div class="fw-fb-mock-radios"
+                                                v-if="['radio', 'checkbox'].includes(field.type)">
+                                                <div><input :type="field.type" disabled> Option 1</div>
+                                                <div v-if="field.type === 'radio'"><input :type="field.type" disabled>
+                                                    Option 2</div>
+                                            </div>
+                                            <div class="fw-fb-mock-file" v-if="field.type === 'file'">
+                                                <i class="icon-upload"></i> File Upload
+                                            </div>
+                                        </div>
+                                    </div>
+                                </template>
+
+                                <template #footer>
+                                    <div class="fw-fb-empty-state" v-if="!section.fields.length">
+                                        Drag fields here
+                                    </div>
+                                </template>
+                            </draggable>
+                        </div>
+                    </div>
+                </template>
+            </draggable>
+
+            <div class="text-center mt-4">
+                <div class="text-muted" v-if="!sections.length">
+                    <em>No sections yet. Add a section to get started.</em>
+                </div>
+            </div>
+        </div>
+
+        <div class="fw-fb-inspector panel" v-if="selectedField">
+            <div class="panel-heading">
+                <span class="panel-title">Field Settings</span>
+                <button type="button" class="close" @click="selectedField = null">&times;</button>
+            </div>
+            <div class="panel-body">
+                <div class="form-group">
+                    <label>Label</label>
+                    <input type="text" v-model="selectedField.label" class="form-control" @input="updateOutput"
+                        @blur="autoGenerateCode(selectedField)">
+                </div>
+                <div class="form-group">
+                    <label>Code (Name)</label>
+                    <input type="text" v-model="selectedField.code" class="form-control" @input="updateOutput">
+                </div>
+                <div class="form-group">
+                    <label>Type</label>
+                    <select v-model="selectedField.type" class="form-control" @change="updateOutput">
+                        <option value="text">Text</option>
+                        <option value="email">Email</option>
+                        <option value="textarea">Textarea</option>
+                        <option value="number">Number</option>
+                        <option value="checkbox">Checkbox</option>
+                        <option value="select">Select Dropdown</option>
+                        <option value="radio">Radio Buttons</option>
+                        <option value="file">File Upload</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>Width (Span)</label>
+                    <select v-model="selectedField.span" class="form-control" @change="updateOutput">
+                        <option value="full">Full Width</option>
+                        <option value="left">Half Width (If 2 Columns)</option>
+                        <option value="right">Half Width (If 2 Columns)</option>
+                    </select>
+                </div>
+                <div class="form-group checkbox-field">
+                    <div class="checkbox custom-checkbox">
+                        <input type="checkbox" :id="'req-'+selectedField.id" v-model="selectedField.required"
+                            @change="updateOutput">
+                        <label :for="'req-'+selectedField.id">Required Field</label>
+                    </div>
+                </div>
+                <div class="form-group"
+                    v-if="['text','email','number','textarea','select'].includes(selectedField.type)">
+                    <label>Placeholder</label>
+                    <input type="text" v-model="selectedField.placeholder" class="form-control" @input="updateOutput">
+                </div>
+                <div class="form-group" v-if="['select','radio'].includes(selectedField.type)">
+                    <label>Options</label>
+                    <textarea v-model="selectedField.options" class="form-control size-small" @input="updateOutput"
+                        placeholder="Comma separated (e.g. Red, Blue) or Key:Value (e.g. r:Red, b:Blue)"></textarea>
+                    <p class="help-block">Separate options with commas.</p>
+                </div>
+                <div class="form-group">
+                    <label>CSS Class</label>
+                    <input type="text" v-model="selectedField.cssClass" class="form-control" @input="updateOutput"
+                        placeholder="form-control">
+                </div>
+                <div class="form-group">
+                    <label>Wrapper CSS Class</label>
+                    <input type="text" v-model="selectedField.wrapperClass" class="form-control" @input="updateOutput"
+                        placeholder="form-group">
+                </div>
+                <div class="form-group">
+                    <label>Custom Validation Rules</label>
+                    <input type="text" v-model="selectedField.validation_rules" class="form-control"
+                        @input="updateOutput" placeholder="e.g. email|max:255">
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Load Vue 3 and Sortable/VueDraggable -->
+<script src="https://unpkg.com/vue@3/dist/vue.global.prod.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/sortablejs@1.15.0/Sortable.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/vuedraggable@4.1.0/dist/vuedraggable.umd.js"></script>
+
+<script>
+    // Initialize the Vue app when the document is ready
+    $(document).ready(function () {
+        if (typeof window.initFormBuilder === 'function') {
+            window.initFormBuilder('<?= $this->getId() ?>');
+        } else {
+            // If JS hasn't loaded yet, retry in a moment
+            setTimeout(function () {
+                if (typeof window.initFormBuilder === 'function') {
+                    window.initFormBuilder('<?= $this->getId() ?>');
+                }
+            }, 500);
+        }
+    });
+</script>

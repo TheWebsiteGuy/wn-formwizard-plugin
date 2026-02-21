@@ -1,0 +1,314 @@
+.fw-formbuilder-app {
+    display: flex;
+    background: #f4f5f8;
+    border: 1px solid #e0e0e0;
+    border-radius: 4px;
+    height: 700px;
+    position: relative;
+    overflow: hidden;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+}
+
+/* Sidebar / Toolbox */
+.fw-fb-sidebar {
+    width: 250px;
+    background: #ffffff;
+    border-right: 1px solid #e0e0e0;
+    padding: 15px;
+    display: flex;
+    flex-direction: column;
+    z-index: 10;
+}
+
+.fw-fb-toolbox h4 {
+    margin-top: 0;
+    margin-bottom: 5px;
+    font-size: 16px;
+}
+
+.fw-fb-tools {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    margin-top: 15px;
+}
+
+.fw-fb-tool-item {
+    padding: 10px 15px;
+    background: #f9fafb;
+    border: 1px solid #e5e7eb;
+    border-radius: 4px;
+    cursor: grab;
+    user-select: none;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 13px;
+    transition: all 0.2s ease;
+}
+
+.fw-fb-tool-item:hover {
+    background: #f3f4f6;
+    border-color: #d1d5db;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+}
+
+.fw-fb-tool-item.sortable-ghost {
+    opacity: 0.5;
+}
+
+/* Canvas Area */
+.fw-fb-canvas {
+    flex: 1;
+    padding: 20px;
+    overflow-y: auto;
+    background: #f4f5f8;
+}
+
+.fw-fb-sections {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    min-height: 100px;
+}
+
+/* Individual Section */
+.fw-fb-section {
+    background: #ffffff;
+    border: 1px solid #e0e0e0;
+    border-radius: 6px;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+    position: relative;
+}
+
+.fw-fb-section-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    padding: 10px 15px;
+    background: #fafafa;
+    border-bottom: 1px solid #e0e0e0;
+    border-radius: 6px 6px 0 0;
+}
+
+.fw-fb-section-handle {
+    cursor: grab;
+    color: #9ca3af;
+    margin-right: 15px;
+    margin-top: 8px;
+    /* align with input visually */
+}
+
+.fw-fb-section-header-left {
+    display: flex;
+    flex: 1;
+}
+
+.fw-fb-section-header-content {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+}
+
+.fw-fb-section-header-content input[type="text"] {
+    font-size: 14px;
+    box-shadow: none !important;
+    width: 100%;
+}
+
+.fw-fb-section-actions {
+    display: flex;
+    align-items: center;
+    padding-right: 35px;
+}
+
+.fw-fb-delete-btn {
+    opacity: 1 !important;
+    visibility: visible !important;
+    display: inline-flex !important;
+    align-items: center;
+    justify-content: center;
+    padding: 6px 10px;
+    position: absolute;
+    top: 10px;
+    right: 15px;
+    z-index: 10;
+}
+
+/* Section Body & Dropzone */
+.fw-fb-section-body {
+    padding: 15px;
+    min-height: 80px;
+}
+
+.fw-fb-dropzone {
+    min-height: 60px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 15px;
+}
+
+.fw-fb-empty-state {
+    width: 100%;
+    padding: 20px;
+    text-align: center;
+    color: #9ca3af;
+    border: 2px dashed #e5e7eb;
+    border-radius: 4px;
+    font-size: 13px;
+    background: #fafafa;
+}
+
+/* Field Item */
+.fw-fb-field {
+    background: #ffffff;
+    border: 1px solid #e5e7eb;
+    border-radius: 4px;
+    padding: 15px;
+    position: relative;
+    cursor: pointer;
+    transition: all 0.2s;
+    width: 100%;
+}
+
+.fw-fb-field:hover {
+    border-color: #3b82f6;
+}
+
+.fw-fb-field.active {
+    border-color: #3b82f6;
+    box-shadow: 0 0 0 2px rgba(59, 130, 246, 0.2);
+}
+
+/* Handle columns */
+.fw-cols-2 .fw-fb-field:not(.fw-field-full) {
+    width: calc(50% - 7.5px);
+}
+
+.fw-fb-field-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(255, 255, 255, 0.8);
+    opacity: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: opacity 0.2s;
+    z-index: 2;
+}
+
+.fw-fb-field:hover .fw-fb-field-overlay {
+    opacity: 1;
+}
+
+.fw-fb-field-actions {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+}
+
+.fw-fb-field-handle {
+    cursor: grab;
+    font-size: 18px;
+    color: #4b5563;
+    padding: 5px;
+    background: #fff;
+    border-radius: 4px;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+/* Mock Inputs (Visual Representation only) */
+.fw-fb-field-preview {
+    pointer-events: none;
+    /* Let drag/click pass through */
+}
+
+.fw-fb-field-preview label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: 600;
+    font-size: 13px;
+    color: #374151;
+}
+
+.fw-fb-mock-input {
+    height: 38px;
+    background: #f9fafb;
+    border: 1px solid #d1d5db;
+    border-radius: 4px;
+    padding: 8px 12px;
+    color: #9ca3af;
+    font-size: 13px;
+}
+
+.fw-fb-mock-input.textarea {
+    height: 80px;
+}
+
+.fw-fb-mock-select {
+    height: 38px;
+    background: #f9fafb url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3e%3cpath fill='none' stroke='%23343a40' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M2 5l6 6 6-6'/%3e%3c/svg%3e") no-repeat right .75rem center/16px 12px;
+    border: 1px solid #d1d5db;
+    border-radius: 4px;
+    padding: 8px 12px;
+    color: #9ca3af;
+    font-size: 13px;
+}
+
+.fw-fb-mock-radios div {
+    margin-bottom: 8px;
+    color: #6b7280;
+    font-size: 13px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.fw-fb-mock-file {
+    padding: 20px;
+    border: 2px dashed #d1d5db;
+    text-align: center;
+    color: #6b7280;
+    border-radius: 4px;
+    font-size: 13px;
+}
+
+/* Inspector Panel */
+.fw-fb-inspector {
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    width: 320px;
+    background: #fff;
+    border-left: 1px solid #e0e0e0;
+    box-shadow: -2px 0 10px rgba(0, 0, 0, 0.05);
+    z-index: 20;
+    display: flex;
+    flex-direction: column;
+    margin: 0 !important;
+}
+
+.fw-fb-inspector .panel-heading {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: #f9fafb;
+    border-bottom: 1px solid #e0e0e0;
+    padding: 12px 15px;
+}
+
+.fw-fb-inspector .panel-body {
+    flex: 1;
+    overflow-y: auto;
+    padding: 15px;
+}
+
+.fw-fb-ghost {
+    opacity: 0.4;
+    background: #ebf8ff;
+    border: 2px dashed #3b82f6;
+}
