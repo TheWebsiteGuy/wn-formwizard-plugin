@@ -35,7 +35,7 @@ Unlike the original plugin, Form Wizard includes a powerful **Visual Form Builde
 composer require thewebsiteguy/wn-formwizard-plugin
 php artisan winter:up
 ```
-### Form Builder
+## Form Builder
 
 You can create and manage forms in the backend, using the Form Builder.
 
@@ -44,7 +44,7 @@ You can create and manage forms in the backend, using the Form Builder.
 Select a field type to add it to the form. You can drag and drop the fields to reorder them. You can also add sections to the form. Click on the field to edit its properties.
 ![Form Builder Preview](assets/images/form-builder.png)
 
-### Basic Usage
+## Basic Usage
 A basic contact is available out of the box. You can find it at:
 > /plugins/thewebsiteguy/formwizard/components/contactform
 
