@@ -54,6 +54,9 @@ You can create and manage forms in the backend, using the Form Builder.
 
 ![Form Builder Preview](assets/images/screenshot2.png)
 
+Select a field type to add it to the form. You can drag and drop the fields to reorder them. You can also add sections to the form. Click on the field to edit its properties.
+![Form Builder Preview](assets/images/form-builder.png)
+
 ## Documentation
 Checkout our docs at:
 > https://formwizard.thewebsiteguy.uk
