@@ -21,3 +21,7 @@
   - Fixed textarea rendering with default rows attribute
   - Fixed form builder dropping previously saved fields on load
   - Fixed frontend forms rendering blank
+1.0.6:
+  - Added Flatpickr date picker for consistent calendar UI across all browsers
+  - Fixed date input calendar hidden by global appearance:none CSS reset
+  - Fixed form builder field numbering using random numbers instead of form field count

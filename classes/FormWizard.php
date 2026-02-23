@@ -35,6 +35,11 @@ abstract class FormWizard extends ComponentBase
     {
         $this->addCss('/plugins/thewebsiteguy/formwizard/assets/css/formwizard.css');
 
+        // Flatpickr date picker
+        $this->addCss('https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css');
+        $this->addJs('https://cdn.jsdelivr.net/npm/flatpickr');
+        $this->addJs('/plugins/thewebsiteguy/formwizard/assets/js/datepicker.js');
+
         $this->page['recaptcha_enabled'] = $this->isReCaptchaEnabled();
         $this->page['recaptcha_misconfigured'] = $this->isReCaptchaMisconfigured();
         $this->page['recaptcha_version'] = Settings::get('recaptcha_version', 'v2');

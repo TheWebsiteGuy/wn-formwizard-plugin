@@ -90,6 +90,12 @@
     box-shadow: 0 0 0 3px color-mix(in srgb, var(--fw-focus-color) 20%, transparent);
 }
 
+/* Date input — restore native calendar picker */
+.fw-form input[type="date"].form-control {
+    appearance: auto;
+    -webkit-appearance: auto;
+}
+
 /* Select — custom arrow */
 .fw-form select.form-control {
     background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23666' stroke-width='2'%3E%3Cpolyline points='6 9 12 15 18 9'/%3E%3C/svg%3E");

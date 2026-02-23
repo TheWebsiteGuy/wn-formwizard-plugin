@@ -96,11 +96,11 @@ window.initFormBuilder = function (id) {
             };
 
             const cloneField = (item) => {
-                const nameNumber = Math.floor(Math.random() * 100);
+                const fieldCount = sections.value.reduce((total, s) => total + (s.fields ? s.fields.length : 0), 0) + 1;
                 return {
                     id: generateId(),
-                    label: item.name + ' ' + nameNumber,
-                    code: 'field' + nameNumber,
+                    label: item.name + ' ' + fieldCount,
+                    code: 'field' + fieldCount,
                     type: item.type,
                     span: 'full',
                     required: false,
@@ -111,6 +111,7 @@ window.initFormBuilder = function (id) {
                     wrapperClass: 'form-group'
                 };
             };
+
 
             const autoGenerateCode = (field) => {
                 if (!field.code || field.code.startsWith('field')) {
